@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/ >
 
     <title>YDKJSBS</title>
 
@@ -56,8 +57,15 @@
                     <li>
                         <a class="page-scroll" href="#calendar">Calendar</a>
                     </li>
-                    <li>
-                        <a class="page-scroll" href="#aug9">Aug 9</a>
+                    <li>                        
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                          Aug 9 <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="page-scroll" href="#sc1">Chapter 1: What is Scope?</a></li>
+                            <li><a class="page-scroll" href="#sc2">Chapter 2: Lexical Scope</a></li>
+                            <li><a class="page-scroll" href="#sc3">Chapter 3: Function Versus Block Scope</a></li>
+                        </ul>
                     </li>
                     <li class="disabled">
                         <a class="page-scroll" href="#aug16">Aug 16</a>
@@ -82,7 +90,7 @@
     </nav>
 
     <!-- Intro Section -->
-    <section id="intro" class="odd-section">
+    <section id="intro" class="first-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -93,7 +101,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1>Part I</h1>
+                            <h3>Part I</h3>
                             <p><strong>Aug 2:</strong> Class Overview + Pass out books</p>
                             <p><strong>Aug 9:</strong> Discuss Chapters 1, 2, 3</p>
                             <p><strong>Aug 16:</strong> Discuss Chapters 4, 5</p>
@@ -108,7 +116,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1>Part II</h1>
+                            <h3>Part II</h3>
                                 <p><strong>Aug 23:</strong> Discuss Chapters 1, 2</p>
                                 <p><strong>Aug 30:</strong> Discuss Chapters 3, 4</p>
                                 <p><strong>Sep 6:</strong> Discuss Chapters 5, 6</p>
@@ -125,53 +133,220 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1>Calendar</h1>
-                    <iframe src="https://calendar.google.com/calendar/embed?src=91fqkajpnfds0flch45vme0ft0%40group.calendar.google.com&ctz=America/New_York" style="border: 0" width="800" height="600" frameborder="1" scrolling="no"></iframe>
+                    <iframe class="center-block" src="https://calendar.google.com/calendar/embed?src=91fqkajpnfds0flch45vme0ft0%40group.calendar.google.com&ctz=America/New_York" style="border: solid" width="800" height="600" frameborder="1" scrolling="no"></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Aug9 Section -->
-    <section id="aug9" class="odd-section">
+    <!-- sc1 Section -->
+    <section id="sc1" class="odd-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1>Chapters 1, 2, 3</h1>
+                    <h1>Chapter 1: What is Scope?</h1>
+                </div>
+            </div>   
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Relevant Terms</h3>
                     <ul>
-                        <li>What is Scope?</li>
-                        <li>Lexical Scope</li>
-                        <li>Function Versus Block Scope</li>
+                        <li><strong>Engine: </strong>responsible for start-to-finish compilation and execution of our JavaScript program.</li>
+                        <li><strong>Compiler: </strong>one of Engine's friends; handles all the dirty work of parsing and code-generation</li>
+                        <li><strong>Scope: </strong>another friend of Engine; collects and maintains a look-up list of all the declared identifiers (variables), and enforces a strict set of rules as to how these are accessible to currently executing code.</li>
+                        <li><strong>LHS (Left Hand Side): </strong>target of the assignment</li>
+                        <li><strong>RHS (Right Hand Side: </strong>source of the assignment</li>
+                        <li><strong>Strict Mode: </strong>Changes mistakes into actual errors. In our context it disallows implicit global instatiations(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode" target="_blank">Read more..</a>)</li>
                     </ul>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-12">
-                    <h1>Example 1</h1>
+                    <h3>Engine/Scope Conversation Example (page 8)</h3>                    
                     <pre class="copytoclipboard">
-<code class="language-js">
+                        <code class="language-js">
 function foo(a) {
-    var b = a;
-    return a + b;
+    console.log( a + b );
 }
 
-var c = foo(2);
-</code>
+var b = 2;
+
+foo( 2 ); // 4
+                        </code>
                     </pre>
+                    <ol>
+                        <li>Identify all the LHS look-ups (there are 3!).</li>
+                        <li>Identify all the RHS look-ups (there are 4!).</li>
+                    </ol>
                 </div>
+            </div>         
+            <div class="row">
                 <div class="col-lg-12">
-                    <h1>Example 1</h1>
+                    <h3>Nested Scope Example (page 9)</h3>
                     <pre class="copytoclipboard">
-<code class="language-js">
-function hello(a) {
-    var b = a;
-    return a + b;
+                        <code class="language-js">
+function foo(a) {
+    console.log( a + b );
 }
 
-var c = hello(2);
-</code>
+var b = 2;
+
+foo( 2 ); // 4
+                        </code>
                     </pre>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Error Example (page 11)</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo(a) {
+    console.log( a + b );
+    b = a;
+}
+
+foo( 2 );
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Building Metaphor</h3>
+                </div>
+                <div class="col-lg-3">
+                    <img src="https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/scope%20%26%20closures/fig1.png" alt="" class="img-responsive">
+                </div>  
+                <div class="col-lg-9">               
+                    <ul>
+                        <li>The building represents our program's nested Scope rule set. The first floor of the building represents your currently executing Scope, wherever you are. The top level of the building is the global Scope.
+                        </li>
+                    <li>You resolve LHS and RHS references by looking on your current floor, and if you don't find it, taking the elevator to the next floor, looking there, then the next, and so on. Once you get to the top floor (the global Scope), you either find what you're looking for, or you don't. But you have to stop regardless.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Key Takeaways</h3>
+                    <ul>                        
+                        <li>Global variables will be created for unfullfilled LHS references in non-strict mode</code>
+                        <li>Use strict mode</li>
+                    </ul>
+                </div>
+            </div> 
         </div>
     </section>
+
+    <!-- sc2 Section -->
+    <section id="sc2" class="even-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Chapter 2: Lexical Scope</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Relevant Terms</h3>
+                    <ul>
+                        <li><strong>Lexical Scope: </strong>based on where variables and blocks of scope are authored, by you, at write time, and thus is (mostly) set in stone by the time the lexer processes your code</li>
+                        <li><strong>Eval: </strong>can modify existing lexical scope (at runtime) by evaluating a string of "code" which has one or more declarations in it (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval" target="_blank">Read more..</a>)</li>
+                        <li><strong>With: </strong>can create a whole new lexical scope (at runtime) by treating an object reference as a "scope" and that object's properties as scoped identifiers (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with" target="_blank">Read more..</a>)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Scope Example</h3>
+                </div>
+                <div class="col-lg-5">
+                    <img class="img-responsive img-border" src="https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/scope%20%26%20closures/fig2.png" alt="">
+                </div>
+                <div class="col-lg-7">
+                    <ul>
+                        <li><strong>Bubble 1 </strong>encompasses the global scope, and has just one identifier in it: <code>foo</code></li>
+                        <li><strong>Bubble 2 </strong>encompasses the scope of foo, which includes the three identifiers: <code>a</code>, <code>bar</code> and <code>b</code>.</li>
+                        <li><strong>Bubble 3 </strong>encompasses the scope of bar, and it includes just one identifier: <code>c</code>.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Eval Example</h3>                    
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo(str, a) {
+    eval( str ); // cheating!
+    console.log( a, b );
+}
+
+var b = 2;
+
+foo( "var b = 3;", 1 ); // 1, 3
+                        </code>
+                    </pre>
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>With Example</h3>                    
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo(obj) {
+    with (obj) {
+        a = 2;
+    }
+}
+
+var o1 = {
+    a: 3
+};
+
+var o2 = {
+    b: 3
+};
+
+foo( o1 );
+console.log( o1.a ); // 2
+
+foo( o2 );
+console.log( o2.a ); // undefined
+console.log( a ); // 2 -- Oops, leaked global!
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Key Takeaways</h3>
+                    <ul>
+                        <li>Scope look-up stops once it finds the first match.</li>
+                        <li>Do <strong>NOT</strong> use <code>eval</code> or <code>with</code>
+                            <ul>
+                                <li>Code in <code>eval</code> and <code>with</code> cannot be optimized so will perform worse than code created normally</li>
+                                <li><code>eval</code> can also be a security issue since it executes any code given to it including strings of unknown or untrusted origin</li>
+                            </ul>
+                        </li>
+                        <li>By extension do <strong>NOT</strong> use <code>setTimeout</code> or <code>setInterval</code> since it is <code>eval</code> in disguise</li>
+
+                    </ul>
+                </div>
+            </div> 
+        </div>
+    </section>
+
+    <!-- sc3 Section -->
+    <section id="sc3" class="odd-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Chapter 3: Function Versus Block Scope</h1>
+                </div>
+            </div>
+        </div>
+    </section>    
+
     <!-- Contact Section -->
     <section id="footer" class="footer-section">
         <div class="container">
