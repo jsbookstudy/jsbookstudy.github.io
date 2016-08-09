@@ -155,8 +155,8 @@
                         <li><strong>Engine: </strong>responsible for start-to-finish compilation and execution of our JavaScript program.</li>
                         <li><strong>Compiler: </strong>one of Engine's friends; handles all the dirty work of parsing and code-generation</li>
                         <li><strong>Scope: </strong>another friend of Engine; collects and maintains a look-up list of all the declared identifiers (variables), and enforces a strict set of rules as to how these are accessible to currently executing code.</li>
-                        <li><strong>LHS (Left Hand Side): </strong>target of the assignment</li>
-                        <li><strong>RHS (Right Hand Side: </strong>source of the assignment</li>
+                        <li><strong>Left Hand Side (LHS): </strong>target of the assignment</li>
+                        <li><strong>Right Hand Side (RHS): </strong>source of the assignment</li>
                         <li><strong>Strict Mode: </strong>Changes mistakes into actual errors. In our context it disallows implicit global instatiations(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode" target="_blank">Read more..</a>)</li>
                     </ul>
                 </div>
@@ -199,22 +199,7 @@ foo( 2 ); // 4
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Error Example (page 11)</h3>
-                    <pre class="copytoclipboard">
-                        <code class="language-js">
-function foo(a) {
-    console.log( a + b );
-    b = a;
-}
-
-foo( 2 );
-                        </code>
-                    </pre>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <h3>Building Metaphor</h3>
+                    <h3>Building Metaphor (page 10)</h3>
                 </div>
                 <div class="col-lg-3">
                     <img src="https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/scope%20%26%20closures/fig1.png" alt="" class="img-responsive">
@@ -227,6 +212,21 @@ foo( 2 );
                     </ul>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Error Example (page 11)</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo(a) {
+    console.log( a + b );
+    b = a;
+}
+
+foo( 2 );
+                        </code>
+                    </pre>
+                </div>
+            </div>            
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
@@ -259,7 +259,7 @@ foo( 2 );
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Scope Example</h3>
+                    <h3>Scope Example (page 14)</h3>
                 </div>
                 <div class="col-lg-5">
                     <img class="img-responsive img-border" src="https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/scope%20%26%20closures/fig2.png" alt="">
@@ -274,7 +274,7 @@ foo( 2 );
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Eval Example</h3>                    
+                    <h3>Eval Example (page 17)</h3>                    
                     <pre class="copytoclipboard">
                         <code class="language-js">
 function foo(str, a) {
@@ -291,7 +291,7 @@ foo( "var b = 3;", 1 ); // 1, 3
             </div> 
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>With Example</h3>                    
+                    <h3>With Example (page 19)</h3>                    
                     <pre class="copytoclipboard">
                         <code class="language-js">
 function foo(obj) {
@@ -352,6 +352,8 @@ console.log( a ); // 2 -- Oops, leaked global!
                         <li><strong>Principle of Least Privilege/Least Authority/Least Exposure: </strong>states that in the design of software, such as the API for a module/object, you should expose only what is minimally necessary, and "hide" everything else</li>
                         <li><strong>Anonymous Function Expression: </strong>a <code>function</code> that is evaluated in-line and does not have a name identifier associated with it.</li>
                         <li><strong>Immediately Invoked Function Expression (IIFE): </strong>a <code>function</code> that evaluated immediatedly</li>
+                        <li><strong>let: </strong>keyword that attaches the variable declaration to the scope of whatever block (commonly a { .. } pair) it's contained in</li>
+                        <li><strong>const: </strong>keyword which creates a block-scoped variable, but whose value is fixed (constant). Any attempt to change that value at a later time results in an error</li>
                     </ul>
                 </div>
             </div>
@@ -459,33 +461,156 @@ console.log( a ); // 2
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Functions as Scopes Extended</h3>                    
+                    <h3>Immediately Invoked Function Example IIFE (page 31)</h3>                    
                     <pre class="copytoclipboard">
                         <code class="language-js">
-(function(){
+var a = 2;
 
-    var privateVariable = 3;
-    alert(privateVariable);
+(function IIFE(){
+
+    var a = 3;
+    console.log( a ); // 3
 
 })();
 
-alert( privateVariable ); // undefined
+console.log( a ); // 2
                         </code>
                     </pre>
                 </div>
-            </div>                                            
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Immediately Invoked Function Example IIFE (page 31)</h3>                    
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var a = 2;
+
+(function IIFE(){
+
+    var a = 3;
+    console.log( a ); // 3
+
+})();
+
+console.log( a ); // 2
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>IIFE pattern example (page 32)</h3>                    
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var a = 2;
+
+(function IIFE( def ){
+    def( window );
+})(function def( global ){
+
+    var a = 3;
+    console.log( a ); // 3
+    console.log( global.a ); // 2
+
+});
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Universal Module Definition Simple (UMD) Example</h3>                    
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS-like
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals (root is window)
+        root.returnExports = factory(root.jQuery);
+    }
+}(this, function ($) {
+    //    methods
+    function myFunc(){};
+
+    //    exposed public method
+    return myFunc;
+}));
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>UMD Complex "Real World" Example</h3>                    
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD
+        define(['jquery', 'underscore'], factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS-like
+        module.exports = factory(require('jquery'), require('underscore'));
+    } else {
+        // Browser globals (root is window)
+        root.returnExports = factory(root.jQuery, root._);
+    }
+}(this, function ($, _) {
+    //    methods
+    function a(){};    //    private because it's not returned (see below)
+    function b(){};    //    public because it's returned
+    function c(){};    //    public because it's returned
+
+    //    exposed public methods
+    return {
+        b: b,
+        c: c
+    }
+}));
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>let Example</h3>                    
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var foo = true;
+
+if (foo) {
+    { // <-- explicit block
+        let bar = foo * 2;
+        bar = something( bar );
+        console.log( bar );
+    }
+}
+
+console.log( bar ); // ReferenceError
+                        </code>
+                    </pre>
+                </div>
+            </div>                                                                                                                              
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
                     <ul>
                         <li>Name your anonymous functions for easier debugging</li>
+                        <li>the <code>catch</code> block in a <code>try/catch</code> is block scope</li>
                         <li>You can use <code>let</code> to allow block scope</li>
+                        <li>Use explicit <code>let</code> blocks to take advantage of garbage collection</li>
+                        <li>If you're not using <code>let</code> due to refactor concerns, at least use them for your <code>for</code> variable declarations</li>
                     </ul>
                 </div>
             </div> 
         </div>
-    </section>    
-    
+    </section>
+
     <!-- week1news Section -->
     <section id="week1news" class="odd-section">
         <div class="container">
@@ -504,8 +629,8 @@ alert( privateVariable ); // undefined
                 </div>
             </div>
         </div>
-    </section>    
-    
+    </section>     
+
     <!-- Contact Section -->
     <section id="footer" class="footer-section">
         <div class="container">
