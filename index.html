@@ -345,6 +345,144 @@ console.log( a ); // 2 -- Oops, leaked global!
                     <h1>Chapter 3: Function Versus Block Scope</h1>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Relevant Terms</h3>
+                    <ul>
+                        <li><strong>Principle of Least Privilege/Least Authority/Least Exposure: </strong>states that in the design of software, such as the API for a module/object, you should expose only what is minimally necessary, and "hide" everything else</li>
+                        <li><strong>Anonymous Function Expression: </strong>a <code>function</code> that is evaluated in-line and does not have a name identifier associated with it.</li>
+                        <li><strong>Immediately Invoked Function Expression (IIFE): </strong>a <code>function</code> that evaluated immediatedly</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Bad doSomething Example (page 25)</h3>                    
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function doSomething(a) {
+    b = a + doSomethingElse( a * 2 );
+
+    console.log( b * 3 );
+}
+
+function doSomethingElse(a) {
+    return a - 1;
+}
+
+var b;
+
+doSomething( 2 ); // 15
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Good doSomething Example (page 26)</h3>                    
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function doSomething(a) {
+    function doSomethingElse(a) {
+        return a - 1;
+    }
+
+    var b;
+
+    b = a + doSomethingElse( a * 2 );
+
+    console.log( b * 3 );
+}
+
+doSomething( 2 ); // 15
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Collision Avoidance Example (page 26)</h3>                    
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo() {
+    function bar(a) {
+        i = 3; // changing the `i` in the enclosing scope's for-loop
+        console.log( a + i );
+    }
+
+    for (var i=0; i<10; i++) {
+        bar( i * 2 ); // oops, infinite loop ahead!
+    }
+}
+
+foo();
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Namespace Example (page 27)</h3>                    
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var MyReallyCoolLibrary = {
+    awesome: "stuff",
+    doSomething: function() {
+        // ...
+    },
+    doAnotherThing: function() {
+        // ...
+    }
+};
+                        </code>
+                    </pre>
+                </div>
+            </div>   
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Functions as Scopes Example (page 28-29)</h3>                    
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var a = 2;
+
+(function foo(){ // <-- insert this
+
+    var a = 3;
+    console.log( a ); // 3
+
+})(); // <-- and this
+
+console.log( a ); // 2
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Functions as Scopes Extended</h3>                    
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+(function(){
+
+    var privateVariable = 3;
+    alert(privateVariable);
+
+})();
+
+alert( privateVariable ); // undefined
+                        </code>
+                    </pre>
+                </div>
+            </div>                                            
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Key Takeaways</h3>
+                    <ul>
+                        <li>Name your anonymous functions for easier debugging</li>
+                        <li>You can use <code>let</code> to allow block scope</li>
+                    </ul>
+                </div>
+            </div> 
         </div>
     </section>    
     
