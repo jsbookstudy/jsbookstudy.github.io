@@ -327,6 +327,7 @@ console.log( a ); // 2 -- Oops, leaked global!
                             <ul>
                                 <li>Code in <code>eval</code> and <code>with</code> cannot be optimized so will perform worse than code created normally</li>
                                 <li><code>eval</code> can also be a security issue since it executes any code given to it including strings of unknown or untrusted origin</li>
+                                <li><code>witch</code> is actually prohibited when in strict mode</li>
                             </ul>
                         </li>
                         <li>By extension do <strong>NOT</strong> use <code>setTimeout</code> or <code>setInterval</code> since it is <code>eval</code> in disguise</li>
@@ -576,7 +577,21 @@ console.log( bar ); // ReferenceError
                         </code>
                     </pre>
                 </div>
-            </div>                                                                                                                              
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>let for loop improvement Example</h3>                    
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+for (let i=0; i<10; i++) {
+    console.log( i );
+}
+
+console.log( i ); // ReferenceError  
+                        </code>
+                    </pre>
+                </div>
+            </div>            
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
