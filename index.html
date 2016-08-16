@@ -68,8 +68,15 @@
                             <li><a class="page-scroll" href="#week1news">This week in JavaScript...</a></li>
                         </ul>
                     </li>
-                    <li class="disabled">
-                        <a class="page-scroll" href="#aug16">Aug 16</a>
+                    <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                          Aug 16 <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="page-scroll" href="#sc4">Chapter 4: Hoisting</a></li>
+                            <li><a class="page-scroll" href="#sc5">Chapter 5: Scope Closure</a></li>
+                            <li><a class="page-scroll" href="#week2news">This week in JavaScript...</a></li>
+                        </ul>
                     </li>
                     <li class="disabled">
                         <a class="page-scroll" href="#aug23">Aug 23</a>
@@ -502,6 +509,10 @@ var a = 2;
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Universal Module Definition Simple (UMD) Example</h3>                    
+                    <ul>
+                        <li>We have one dependecy here and its jQuery aka <code>$</code></li>
+                        <li>Since we're not using AMD or CommonJS our export will be to <code>root.returnExports</code></li>
+                    </ul>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 (function (root, factory) {
@@ -528,7 +539,11 @@ var a = 2;
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>UMD Complex "Real World" Example</h3>                    
+                    <h3>UMD Complex "Real World" Example</h3>
+                    <ul>
+                        <li>We have two dependecies jQuery <code>$</code> and Underscore <code>_</code></li>
+                        <li>Since we're not using AMD or CommonJS our export will again be to <code>root.returnExports</code></li>
+                    </ul>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 (function (root, factory) {
@@ -556,6 +571,9 @@ var a = 2;
 }));
                         </code>
                     </pre>
+                    <ul>
+                        <li>Our dependencies are enclosed in it's own function scope so a global <code>$</code> or <code>_</code> will not pollute our scope if they happen to exist</li>
+                    </ul>
                 </div>
             </div>
             <div class="row">
@@ -625,7 +643,388 @@ console.log( i ); // ReferenceError
                 </div>
             </div>
         </div>
-    </section>     
+    </section>
+
+    <!-- sc4 Section -->
+    <section id="sc4" class="even-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Chapter 4: Hoisting</h1>
+                </div>
+            </div>   
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Relevant Terms</h3>
+                    <ul>
+                        <li><strong>Hoisting: </strong>where variable and function declarations are "moved" from where they appear in the code to the top of the code</li>
+                        <li><strong>The Chicken & The Egg Metaphor</strong></li>
+                        <ol>
+                            <li><strong>Egg: </strong>the declaration</li>
+                            <li><strong>Chicken: </strong>the assignment</li>                        
+                        </ol>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Hoisting Example (page 41)</h3>
+                    <p>What You see...</p>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+a = 2;
+
+var a;
+
+console.log( a );
+                        </code>
+                    </pre>
+                    <p>What the Engine sees...</p>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var a;
+
+a = 2;
+
+console.log( a );
+                        </code>
+                    </pre>                    
+                </div>
+            </div>    
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Hoisting Example Continued (page 42)</h3>
+                    <p>What You see...</p>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+console.log( a );
+
+var a = 2;
+                        </code>
+                    </pre>
+                    <p>What the Engine sees...</p>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var a;
+
+console.log( a );
+
+a = 2;
+                        </code>
+                    </pre>                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Function Hoisting Example</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+// Outputs: "Function declaration hoisted!"
+declarationHoisted();
+
+// TypeError: expressionNotHoisted is not a function
+expressionNotHoisted();
+
+function declarationHoisted() {
+    console.log("Function declaration hoisted!");
+}
+
+var expressionNotHoisted = function () {
+    console.log("Expression not hoisted!");
+};
+                        </code>
+                    </pre>               
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Functions First Example (page 45)</h3>
+                    <p>Functions are hoisted before variables</p>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+foo(); // 1
+
+var foo;
+
+function foo() {
+    console.log( 1 );
+}
+
+foo = function() {
+    console.log( 2 );
+};
+                        </code>
+                    </pre>
+                    <p>What the Engine sees...</p>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo() {
+    console.log( 1 );
+}
+
+foo(); // 1
+
+foo = function() {
+    console.log( 2 );
+};
+                        </code>
+                    </pre>                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Duplicate Function Declarations Example (page 45)</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+foo(); // 3
+
+function foo() {
+    console.log( 1 );
+}
+
+var foo = function() {
+    console.log( 2 );
+};
+
+function foo() {
+    console.log( 3 );
+}
+                        </code>
+                    </pre>                 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Reiterating Function Scope (page 46)</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+foo(); // "b"
+
+var a = true;
+if (a) {
+   function foo() { console.log( "a" ); }
+}
+else {
+   function foo() { console.log( "b" ); }
+}
+                        </code>
+                    </pre>                 
+                </div>
+            </div>                                   
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Key Takeaways</h3>
+                    <ul>                        
+                        <li>Hoisting is <i>per scope</i></code>
+                        <li>Only declarations are hoisted while any assignments or other executable logic is left in place</li>
+                        <li>Function declarations are hoisted while function expressions are not</li>
+                        <li>Functions are hoisted before variables</li>
+                        <li>Don't duplicate your definitions within the same scope</li>
+                    </ul>
+                </div>
+            </div> 
+        </div>
+    </section>         
+
+    <!-- sc5 Section -->
+    <section id="sc5" class="odd-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Chapter 5: Scope Closure</h1>
+                </div>
+            </div>   
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Relevant Terms</h3>
+                    <ul>
+                        <li><strong>Closure: </strong>when a function is able to remember and access its lexical scope even when that function is executing outside its lexical scope</li>
+                    </ul>
+                </div>
+            </div>   
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Closure (page 49-51)</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo() {
+    var a = 2;
+
+    function bar() {
+        console.log( a );
+    }
+
+    return bar;
+}
+
+var baz = foo();
+
+baz(); // 2 -- Whoa, closure was just observed, man.
+                        </code>
+                    </pre>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo() {
+    var a = 2;
+
+    function baz() {
+        console.log( a ); // 2
+    }
+
+    bar( baz );
+}
+
+function bar(fn) {
+    fn(); // look ma, I saw closure!
+}
+                        </code>
+                    </pre>    
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var fn;
+
+function foo() {
+    var a = 2;
+
+    function baz() {
+        console.log( a );
+    }
+
+    fn = baz; // assign `baz` to global variable
+}
+
+function bar() {
+    fn(); // look ma, I saw closure!
+}
+
+foo();
+
+bar(); // 2
+                        </code>
+                    </pre>                        
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Timeout Example (page 51)</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function wait(message) {
+
+    setTimeout( function timer(){
+        console.log( message );
+    }, 1000 );
+
+}
+
+wait( "Hello, closure!" );
+                        </code>
+                    </pre>                        
+                </div>
+            </div>                                    
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>jQuery Example (page 52)</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function setupBot(name,selector) {
+    $( selector ).click( function activator(){
+        console.log( "Activating: " + name );
+    } );
+}
+
+setupBot( "Closure Bot 1", "#bot_1" );
+setupBot( "Closure Bot 2", "#bot_2" );
+                        </code>
+                    </pre>                        
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>for Loop Closure Example (page 53)</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+for (var i=1; i<=5; i++) {
+    setTimeout( function timer(){
+        console.log( i );
+    }, i*1000 );
+}
+                        </code>
+                    </pre>                        
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>for Loop Closure Example FIXED (page 55)</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+for (var i=1; i<=5; i++) {
+    (function(){
+        var j = i;
+        setTimeout( function timer(){
+            console.log( j );
+        }, j*1000 );
+    })();
+}
+                        </code>
+                    </pre>                        
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+for (var i=1; i<=5; i++) {
+    (function(j){
+        setTimeout( function timer(){
+            console.log( j );
+        }, j*1000 );
+    })( i );
+}
+                        </code>
+                    </pre>   
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>for Loop Closure Example FIXED w/ let (page 56)</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+for (let i=1; i<=5; i++) {
+    setTimeout( function timer(){
+        console.log( i );
+    }, i*1000 );
+}
+                        </code>
+                    </pre>                        
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Key Takeaways</h3>
+                    <ul>                        
+                        <li>Whatever facility we use to <i>transport</i> an inner function outside of its lexical scope, it will maintain a scope reference to where it was originally declared, and wherever we execute him, that closure will be exercised</li>
+                    </ul>
+                </div>
+            </div> 
+        </div>
+    </section>  
+
+    <!-- week2news Section -->
+    <section id="week2news" class="even-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>This week in JavaScript...</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul>
+                        <li><a target="_blank" href="https://www.reddit.com/r/javascript/comments/4waaiw/til_the_string_length_function_doesnt_count_the/">JavaScript String length function doesn't count the number of characters</a></li>
+                        <li><a target="_blank" href="http://courses.angularclass.com/courses/modern-javascript">Free Modern JavaScript course</a></li>
+                        <li><a target="_blank" href="https://blog.pusher.com/building-a-pokemon-go-clone-using-web-technologies-and-pusher/?utm_source=reddit&utm_medium=social&utm_campaign=reddit_aug16">PokemonGO Clone w/ JavaScript</a></li>                    
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>               
 
     <!-- Contact Section -->
     <section id="footer" class="footer-section">
