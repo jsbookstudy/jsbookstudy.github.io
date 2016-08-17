@@ -57,7 +57,10 @@
                     <li>
                         <a class="page-scroll" href="#calendar">Calendar</a>
                     </li>
-                    <li>                        
+                    <li>
+                        <a class="page-scroll" href="#poll">Poll</a>
+                    </li>
+                    <li>
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                           Aug 9 <span class="caret"></span>
                         </a>
@@ -90,7 +93,7 @@
                         <a class="page-scroll" href="#sep6">Sep 6</a>
                     </li>
                     <li>
-                        <a class="" href="https://github.com/getify/You-Dont-Know-JS/archive/master.zip"><span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Digital Books</a> 
+                        <a class="" href="https://github.com/getify/You-Dont-Know-JS/archive/master.zip"><span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Digital Books</a>
                     </li>
                 </ul>
             </div>
@@ -106,7 +109,7 @@
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-lg-12">
-                            <img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/51SqAlfxJiL._SX331_BO1,204,203,200_.jpg" alt="">                        
+                            <img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/51SqAlfxJiL._SX331_BO1,204,203,200_.jpg" alt="">
                         </div>
                     </div>
                     <div class="row">
@@ -116,12 +119,12 @@
                             <p><strong>Aug 9:</strong> Discuss Chapters 1, 2, 3</p>
                             <p><strong>Aug 16:</strong> Discuss Chapters 4, 5 (22 pgs)</p>
                         </div>
-                    </div>               
+                    </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-lg-12">
-                            <img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/41MZdroe73L._SX331_BO1,204,203,200_.jpg" alt="">                        
+                            <img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/41MZdroe73L._SX331_BO1,204,203,200_.jpg" alt="">
                         </div>
                     </div>
                     <div class="row">
@@ -131,7 +134,7 @@
                                 <p><strong>Aug 30:</strong> Discuss Chapters 3, 4 (48 pgs)</p>
                                 <p><strong>Sep 6:</strong> Discuss Chapters 5, 6 (57 pgs)</p>
                         </div>
-                    </div>               
+                    </div>
                 </div>
             </div>
         </div>
@@ -149,6 +152,17 @@
         </div>
     </section>
 
+    <section id="poll" class="even-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>How interested are you in follow-up JS book studies?</h1>
+                    <iframe class="center-block" src="http://www.strawpoll.me/embed_1/11009397" style="width:600px;height:600px;border:0;">Loading poll...</iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- sc1 Section -->
     <section id="sc1" class="odd-section">
         <div class="container">
@@ -156,7 +170,7 @@
                 <div class="col-lg-12">
                     <h1>Chapter 1: What is Scope?</h1>
                 </div>
-            </div>   
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Relevant Terms</h3>
@@ -172,7 +186,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Engine/Scope Conversation Example (page 8)</h3>                    
+                    <h3>Engine/Scope Conversation Example (page 8)</h3>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 function foo(a) {
@@ -189,7 +203,7 @@ foo( 2 ); // 4
                         <li>Identify all the RHS look-ups (there are 4!).</li>
                     </ol>
                 </div>
-            </div>         
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Nested Scope Example (page 9)</h3>
@@ -212,8 +226,8 @@ foo( 2 ); // 4
                 </div>
                 <div class="col-lg-3">
                     <img src="https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/scope%20%26%20closures/fig1.png" alt="" class="img-responsive">
-                </div>  
-                <div class="col-lg-9">               
+                </div>
+                <div class="col-lg-9">
                     <ul>
                         <li>The building represents our program's nested Scope rule set. The first floor of the building represents your currently executing Scope, wherever you are. The top level of the building is the global Scope.
                         </li>
@@ -235,16 +249,16 @@ foo( 2 );
                         </code>
                     </pre>
                 </div>
-            </div>            
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
-                    <ul>                        
+                    <ul>
                         <li>Global variables will be created for unfullfilled LHS references in non-strict mode</code>
                         <li>Use strict mode</li>
                     </ul>
                 </div>
-            </div> 
+            </div>
         </div>
     </section>
 
@@ -283,7 +297,7 @@ foo( 2 );
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Eval Example (page 17)</h3>                    
+                    <h3>Eval Example (page 17)</h3>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 function foo(str, a) {
@@ -297,10 +311,10 @@ foo( "var b = 3;", 1 ); // 1, 3
                         </code>
                     </pre>
                 </div>
-            </div> 
+            </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>With Example (page 19)</h3>                    
+                    <h3>With Example (page 19)</h3>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 function foo(obj) {
@@ -343,7 +357,7 @@ console.log( a ); // 2 -- Oops, leaked global!
 
                     </ul>
                 </div>
-            </div> 
+            </div>
         </div>
     </section>
 
@@ -369,7 +383,7 @@ console.log( a ); // 2 -- Oops, leaked global!
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Bad doSomething Example (page 25)</h3>                    
+                    <h3>Bad doSomething Example (page 25)</h3>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 function doSomething(a) {
@@ -391,7 +405,7 @@ doSomething( 2 ); // 15
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Good doSomething Example (page 26)</h3>                    
+                    <h3>Good doSomething Example (page 26)</h3>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 function doSomething(a) {
@@ -413,7 +427,7 @@ doSomething( 2 ); // 15
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Collision Avoidance Example (page 26)</h3>                    
+                    <h3>Collision Avoidance Example (page 26)</h3>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 function foo() {
@@ -434,7 +448,7 @@ foo();
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Namespace Example (page 27)</h3>                    
+                    <h3>Namespace Example (page 27)</h3>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 var MyReallyCoolLibrary = {
@@ -449,10 +463,10 @@ var MyReallyCoolLibrary = {
                         </code>
                     </pre>
                 </div>
-            </div>   
+            </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Functions as Scopes Example (page 28-29)</h3>                    
+                    <h3>Functions as Scopes Example (page 28-29)</h3>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 var a = 2;
@@ -471,7 +485,7 @@ console.log( a ); // 2
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Immediately Invoked Function Example IIFE (page 31)</h3>                    
+                    <h3>Immediately Invoked Function Example IIFE (page 31)</h3>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 var a = 2;
@@ -490,7 +504,7 @@ console.log( a ); // 2
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>IIFE pattern example (page 32)</h3>                    
+                    <h3>IIFE pattern example (page 32)</h3>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 var a = 2;
@@ -510,7 +524,7 @@ var a = 2;
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Universal Module Definition Simple (UMD) Example</h3>                    
+                    <h3>Universal Module Definition Simple (UMD) Example</h3>
                     <ul>
                         <li>We have one dependecy here and its jQuery aka <code>$</code></li>
                         <li>Since we're not using AMD or CommonJS our export will be to <code>root.returnExports</code></li>
@@ -580,7 +594,7 @@ var a = 2;
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>let Example</h3>                    
+                    <h3>let Example</h3>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 var foo = true;
@@ -600,18 +614,18 @@ console.log( bar ); // ReferenceError
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>let for loop improvement Example</h3>                    
+                    <h3>let for loop improvement Example</h3>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 for (let i=0; i<10; i++) {
     console.log( i );
 }
 
-console.log( i ); // ReferenceError  
+console.log( i ); // ReferenceError
                         </code>
                     </pre>
                 </div>
-            </div>            
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
@@ -623,7 +637,7 @@ console.log( i ); // ReferenceError
                         <li>If you're not using <code>let</code> due to refactor concerns, at least use them for your <code>for</code> variable declarations</li>
                     </ul>
                 </div>
-            </div> 
+            </div>
         </div>
     </section>
 
@@ -640,7 +654,7 @@ console.log( i ); // ReferenceError
                     <ul>
                         <li><a target="_blank" href="https://www.reddit.com/r/javascript/comments/4waaiw/til_the_string_length_function_doesnt_count_the/">JavaScript String length function doesn't count the number of characters</a></li>
                         <li><a target="_blank" href="http://courses.angularclass.com/courses/modern-javascript">Free Modern JavaScript course</a></li>
-                        <li><a target="_blank" href="https://blog.pusher.com/building-a-pokemon-go-clone-using-web-technologies-and-pusher/?utm_source=reddit&utm_medium=social&utm_campaign=reddit_aug16">PokemonGO Clone w/ JavaScript</a></li>                    
+                        <li><a target="_blank" href="https://blog.pusher.com/building-a-pokemon-go-clone-using-web-technologies-and-pusher/?utm_source=reddit&utm_medium=social&utm_campaign=reddit_aug16">PokemonGO Clone w/ JavaScript</a></li>
                     </ul>
                 </div>
             </div>
@@ -659,13 +673,13 @@ console.log( i ); // ReferenceError
                     <p>Read...</p>
                     <ul>
                         <li>Chapter 4: Hoisting</li>
-                        <li>Chapter 5: Scope Closure</a></li>                        
+                        <li>Chapter 5: Scope Closure</a></li>
                     </ul>
                     <p><strong>[22 pages]</strong></p>
                 </div>
             </div>
         </div>
-    </section>      
+    </section>
 
     <!-- sc4 Section -->
     <section id="sc4" class="odd-section">
@@ -674,7 +688,7 @@ console.log( i ); // ReferenceError
                 <div class="col-lg-12">
                     <h1>Chapter 4: Hoisting</h1>
                 </div>
-            </div>   
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Relevant Terms</h3>
@@ -683,7 +697,7 @@ console.log( i ); // ReferenceError
                         <li><strong>The Chicken & The Egg Metaphor</strong></li>
                         <ol>
                             <li><strong>Egg: </strong>the declaration</li>
-                            <li><strong>Chicken: </strong>the assignment</li>                        
+                            <li><strong>Chicken: </strong>the assignment</li>
                         </ol>
                     </ul>
                 </div>
@@ -710,9 +724,9 @@ a = 2;
 
 console.log( a );
                         </code>
-                    </pre>                    
+                    </pre>
                 </div>
-            </div>    
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Hoisting Example Continued (page 42)</h3>
@@ -733,7 +747,7 @@ console.log( a );
 
 a = 2;
                         </code>
-                    </pre>                    
+                    </pre>
                 </div>
             </div>
             <div class="row">
@@ -755,7 +769,7 @@ var expressionNotHoisted = function () {
     console.log("Expression not hoisted!");
 };
                         </code>
-                    </pre>               
+                    </pre>
                 </div>
             </div>
             <div class="row">
@@ -790,7 +804,7 @@ foo = function() {
     console.log( 2 );
 };
                         </code>
-                    </pre>                    
+                    </pre>
                 </div>
             </div>
             <div class="row">
@@ -812,7 +826,7 @@ function foo() {
     console.log( 3 );
 }
                         </code>
-                    </pre>                 
+                    </pre>
                 </div>
             </div>
             <div class="row">
@@ -830,13 +844,13 @@ else {
    function foo() { console.log( "b" ); }
 }
                         </code>
-                    </pre>                 
+                    </pre>
                 </div>
-            </div>                                   
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
-                    <ul>                        
+                    <ul>
                         <li>Hoisting is <i>per scope</i></code>
                         <li>Only declarations are hoisted while any assignments or other executable logic is left in place</li>
                         <li>Function declarations are hoisted while function expressions are not</li>
@@ -844,9 +858,9 @@ else {
                         <li>Don't duplicate your definitions within the same scope</li>
                     </ul>
                 </div>
-            </div> 
+            </div>
         </div>
-    </section>         
+    </section>
 
     <!-- sc5 Section -->
     <section id="sc5" class="even-section">
@@ -855,7 +869,7 @@ else {
                 <div class="col-lg-12">
                     <h1>Chapter 5: Scope Closure</h1>
                 </div>
-            </div>   
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Relevant Terms</h3>
@@ -870,7 +884,7 @@ else {
                         </li>
                     </ul>
                 </div>
-            </div>   
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Closure (page 49-51)</h3>
@@ -907,7 +921,7 @@ function bar(fn) {
     fn(); // look ma, I saw closure!
 }
                         </code>
-                    </pre>    
+                    </pre>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 var fn;
@@ -930,7 +944,7 @@ foo();
 
 bar(); // 2
                         </code>
-                    </pre>                        
+                    </pre>
                 </div>
             </div>
             <div class="row">
@@ -948,9 +962,9 @@ function wait(message) {
 
 wait( "Hello, closure!" );
                         </code>
-                    </pre>                        
+                    </pre>
                 </div>
-            </div>                                    
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>jQuery Example (page 52)</h3>
@@ -965,7 +979,7 @@ function setupBot(name,selector) {
 setupBot( "Closure Bot 1", "#bot_1" );
 setupBot( "Closure Bot 2", "#bot_2" );
                         </code>
-                    </pre>                        
+                    </pre>
                 </div>
             </div>
             <div class="row">
@@ -979,7 +993,7 @@ for (var i=1; i<=5; i++) {
     }, i*1000 );
 }
                         </code>
-                    </pre>                        
+                    </pre>
                 </div>
             </div>
             <div class="row">
@@ -996,7 +1010,7 @@ for (var i=1; i<=5; i++) {
     })();
 }
                         </code>
-                    </pre>                        
+                    </pre>
                     <pre class="copytoclipboard">
                         <code class="language-js">
 for (var i=1; i<=5; i++) {
@@ -1007,9 +1021,9 @@ for (var i=1; i<=5; i++) {
     })( i );
 }
                         </code>
-                    </pre>   
+                    </pre>
                 </div>
-            </div> 
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>for Loop Closure Example FIXED w/ let (page 56)</h3>
@@ -1021,9 +1035,9 @@ for (let i=1; i<=5; i++) {
     }, i*1000 );
 }
                         </code>
-                    </pre>                        
+                    </pre>
                 </div>
-            </div>     
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Module Example (page 57)</h3>
@@ -1052,7 +1066,7 @@ var foo = CoolModule();
 foo.doSomething(); // cool
 foo.doAnother(); // 1 ! 2 ! 3
                         </code>
-                    </pre>                        
+                    </pre>
                 </div>
             </div>
             <div class="row">
@@ -1086,19 +1100,19 @@ foo.identify(); // foo module
 foo.change();
 foo.identify(); // FOO MODULE
                         </code>
-                    </pre>                        
+                    </pre>
                 </div>
-            </div>                      
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
-                    <ul>                        
+                    <ul>
                         <li>Whatever facility we use to <i>transport</i> an inner function outside of its lexical scope, it will maintain a scope reference to where it was originally declared, and wherever we execute him, that closure will be exercised</li>
                     </ul>
                 </div>
-            </div> 
+            </div>
         </div>
-    </section>  
+    </section>
 
     <!-- week2news Section -->
     <section id="week2news" class="odd-section">
@@ -1112,7 +1126,7 @@ foo.identify(); // FOO MODULE
                 <div class="col-lg-12">
                     <ul>
                         <li><a target="_blank" href="http://caniuse.com/">Can I Use?</a></li>
-                        <li><a target="_blank" href="https://github.com/FormidableLabs/webpack-dashboard">Webpack Dashboard</a></li>                        
+                        <li><a target="_blank" href="https://github.com/FormidableLabs/webpack-dashboard">Webpack Dashboard</a></li>
                         <li><a target="_blank" href="https://nolanlawson.com/2016/08/15/the-cost-of-small-modules/">Cost of small modules</a></li>
                         <li><a target="_blank" href="https://www.reddit.com/r/javascript/comments/4x1frv/should_we_load_css_in_our_javascript/">Discussion on whether or not to include CSS in JS</a></li>
                     </ul>
@@ -1132,20 +1146,20 @@ foo.identify(); // FOO MODULE
                     <p>Read...</p>
                     <ul>
                         <li>Chapter 1: this or That?</li>
-                        <li>Chapter 2: this All Makes Sense Now</a></li>                                             
+                        <li>Chapter 2: this All Makes Sense Now</a></li>
                     </ul>
-                    <strong>[33 pages]</strong>  
+                    <strong>[33 pages]</strong>
                 </div>
             </div>
         </div>
-    </section>               
+    </section>
 
     <!-- Contact Section -->
     <section id="footer" class="footer-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    
+
                 </div>
             </div>
         </div>
