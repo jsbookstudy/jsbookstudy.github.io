@@ -1,0 +1,42 @@
+<snippet>
+	<content><![CDATA[
+<!-- ${1:sectionId} Section -->
+<section id="${1:sectionId}" class="${2:evenOrOdd}-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Chapter ${3:chapter-number}: ${4:chapter-title}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Relevant Terms</h3>
+                <ul>
+                    <li><strong>${14:term-1}: </strong>${15:def-1}</li>
+                    <li><strong>${16:term-1}: </strong>${17:def-1}</li>
+                    <li><strong>${18:term-1}: </strong>${19:def-1}</li>
+                    <li><strong>${20:term-1}: </strong>${21:def-1}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li>${52:kt-1}</li>
+                    <li>${53:kt-1}</li>
+                    <li>${54:kt-1}</li>
+                    <li>${55:kt-1}</li>
+                    <li>${56:kt-1}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<!-- <tabTrigger>hello</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+<tabTrigger>chapter</tabTrigger>
+</snippet>
