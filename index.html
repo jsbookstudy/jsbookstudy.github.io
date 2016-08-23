@@ -165,7 +165,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1>How interested are you in follow-up JS book studies?</h1>
-                    <iframe class="center-block" src="http://www.strawpoll.me/embed_1/11009397" style="width:600px;height:600px;border:0;">Loading poll...</iframe>
+                    <iframe class="center-block" src="https://www.strawpoll.me/embed_1/11009397" style="width:600px;height:600px;border:0;">Loading poll...</iframe>
                 </div>
             </div>
         </div>
@@ -1729,7 +1729,54 @@ bar( 3 ); // a:2, b:3
                 </div>
             </div>
             <!-- REVIEW SOFT BINDING -->
-            <!-- REVIEW => LEXICAL THIS -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>lexical <i>this</i></h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo() {
+    // return an arrow function
+    return (a) => {
+        // `this` here is lexically adopted from `foo()`
+        console.log( this.a );
+    };
+}
+
+var obj1 = {
+    a: 2
+};
+
+var obj2 = {
+    a: 3
+};
+
+var bar = foo.call( obj1 );
+bar.call( obj2 ); // 2, not 3!
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>common real world lexical <i>this</i></h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo() {
+    var self = this; // lexical capture of `this`
+    setTimeout( function(){
+        console.log( self.a );
+    }, 100 );
+}
+
+var obj = {
+    a: 2
+};
+
+foo.call( obj ); // 2
+                        </code>
+                    </pre>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
@@ -1738,7 +1785,12 @@ bar( 3 ); // a:2, b:3
                         <li>Mixing non-strict mode and strict mode within your own code is not recommended</li>
                         <li><code>this</code> binding precedence: new > explicit > implicit > default</li>
                         <li>Use a DMZ empty object when you want to explicitly pass null for <code>call</code> & <code>apply</code></li>
-                        <li>kt-1</li>
+                        <li>if you end up writing a lot of <code>self = this</code> you should:
+                            <ol>
+                                <li>Use only lexical scope and forget the false pretense of <code>this</code>-style code.</li>
+                                <li>Embrace <code>this</code>-style mechanisms completely, including using <code>bind(..)</code> where necessary, and try to avoid <code>self = this</code> and arrow-function "lexical this" tricks.</li>
+                            </ol>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -1756,12 +1808,11 @@ bar( 3 ); // a:2, b:3
             <div class="row">
                 <div class="col-lg-12">
                     <ul>
-                        <li><a target="_blank" href="">LINK</a></li>
-                        <li><a target="_blank" href="">LINK</a></li>
-                        <li><a target="_blank" href="">LINK</a></li>
-                        <li><a target="_blank" href="">LINK</a></li>
-                        <li><a target="_blank" href="">LINK</a></li>
-                        <li><a target="_blank" href="">LINK</a></li>                
+                        <li><a target="_blank" href="https://snipcart.com/blog/learn-vanilla-javascript-before-using-js-frameworks">You should learn Vanilla JS before frameworks</a></li>
+                        <li><a target="_blank" href="https://ecmascript-daily.github.io/">ECMAScript Daily</a></li>
+                        <li><a target="_blank" href="http://www.echojs.com/">EchoJS</a></li>
+                        <li><a target="_blank" href="https://news.js.org/">js.org</a></li>
+                        <li><a target="_blank" href="https://github.com/nasa/openmct">NASA Mission Control in JS</a></li>
                     </ul>
                 </div>
             </div>
@@ -1781,11 +1832,11 @@ bar( 3 ); // a:2, b:3
                         <li>Chapter 3: Objects</li>
                         <li>Chapter 4: Mixing (Up) "Class" Objects</a></li>
                     </ul>
-                    <strong>[## pages]</strong>
+                    <strong>[48 pages]</strong>
                 </div>
             </div>
         </div>
-    </section>    
+    </section>
 
     <!-- Contact Section -->
     <section id="footer" class="footer-section">
