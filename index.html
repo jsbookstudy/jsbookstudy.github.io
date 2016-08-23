@@ -89,7 +89,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="page-scroll" href="#to1">Chapter 1: <i>this</i> Or That</a></li>
-                            <li><a class="page-scroll" href="#to2">Chapter 2: <i>this</i> All Makes Sense Now</a></li>
+                            <li><a class="page-scroll" href="#to2">Chapter 2: <i>this</i> All Makes Sense Now!</a></li>
                             <li><a class="page-scroll" href="#week3news">This week in JavaScript...</a></li>
                             <li><a class="page-scroll" href="#hw3">Homework</a></li>
                         </ul>
@@ -1318,6 +1318,474 @@ foo(); //undefined
             </div>
         </div>
     </section>
+
+    <!-- to2 Section -->
+    <section id="to2" class="even-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Chapter 2: <i>this</i> All Makes Sense Now!</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Relevant Terms</h3>
+                    <ul>
+                        <li><strong>call-stack: </strong>the stack of functions that has been called to get us to the current moment in execution</li>
+                        <li><strong>call-site: </strong>the location in code where a function is called: one level from the top of the call-stack</li>
+                        <li><strong>default binding: </strong>def-1</li>
+                        <li><strong>implicit binding: </strong>def-1</li>
+                        <li><strong>explicit binding: </strong>def-1</li>
+                        <li><strong>new binding: </strong>def-1</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>call-stack and call-site example</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function baz() {
+    // call-stack is: `baz`
+    // so, our call-site is in the global scope
+
+    console.log( "baz" );
+    bar(); // <-- call-site for `bar`
+}
+
+function bar() {
+    // call-stack is: `baz` -> `bar`
+    // so, our call-site is in `baz`
+
+    console.log( "bar" );
+    foo(); // <-- call-site for `foo`
+}
+
+function foo() {
+    // call-stack is: `baz` -> `bar` -> `foo`
+    // so, our call-site is in `bar`
+
+    console.log( "foo" );
+}
+
+baz(); // <-- call-site for `baz`
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>default binding</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo() {
+    console.log( this.a );
+}
+
+var a = 2;
+
+foo(); // 2
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>default binding in strict mode</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo() {
+    "use strict";
+
+    console.log( this.a );
+}
+
+var a = 2;
+
+foo(); // TypeError: `this` is `undefined`
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>implicit binding</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo() {
+    console.log( this.a );
+}
+
+var obj = {
+    a: 2,
+    foo: foo
+};
+
+obj.foo(); // 2
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>implicit binding only cares about the last defined object in the property reference chain</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo() {
+    console.log( this.a );
+}
+
+var obj2 = {
+    a: 42,
+    foo: foo
+};
+
+var obj1 = {
+    a: 2,
+    obj2: obj2
+};
+
+obj1.obj2.foo(); // 42
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>losing implicit binding</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo() {
+    console.log( this.a );
+}
+
+var obj = {
+    a: 2,
+    foo: foo
+};
+
+var bar = obj.foo; // function reference/alias!
+
+var a = "oops, global"; // `a` also property on global object
+
+bar(); // "oops, global"
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>losing implicit binding "real life" example</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo() {
+    console.log( this.a );
+}
+
+function doFoo(fn) {
+    // `fn` is just another reference to `foo`
+
+    fn(); // <-- call-site!
+}
+
+var obj = {
+    a: 2,
+    foo: foo
+};
+
+var a = "oops, global"; // `a` also property on global object
+
+doFoo( obj.foo ); // "oops, global"
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>explicit binding</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo() {
+    console.log( this.a );
+}
+
+var obj = {
+    a: 2
+};
+
+foo.call( obj ); // 2
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>hard binding</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo() {
+    console.log( this.a );
+}
+
+var obj = {
+    a: 2
+};
+
+var bar = function() {
+    foo.call( obj );
+};
+
+bar(); // 2
+setTimeout( bar, 100 ); // 2
+
+// `bar` hard binds `foo`'s `this` to `obj`
+// so that it cannot be overriden
+bar.call( window ); // 2
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>hard binding pass-thru</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo(something) {
+    console.log( this.a, something );
+    return this.a + something;
+}
+
+var obj = {
+    a: 2
+};
+
+var bar = function() {
+    return foo.apply( obj, arguments );
+};
+
+var b = bar( 3 ); // 2 3
+console.log( b ); // 5
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>hard binding reusable helper</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo(something) {
+    console.log( this.a, something );
+    return this.a + something;
+}
+
+// simple `bind` helper
+function bind(fn, obj) {
+    return function() {
+        return fn.apply( obj, arguments );
+    };
+}
+
+var obj = {
+    a: 2
+};
+
+var bar = bind( foo, obj );
+
+var b = bar( 3 ); // 2 3
+console.log( b ); // 5
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>hard binding ES5</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo(something) {
+    console.log( this.a, something );
+    return this.a + something;
+}
+
+var obj = {
+    a: 2
+};
+
+var bar = foo.bind( obj );
+
+var b = bar( 3 ); // 2 3
+console.log( b ); // 5
+                        </code>
+                    </pre>
+                    <p>ES6 <code>bind()</code> also has a <code>.name</code> property that shows where it was bound. For the above example the <code>bar.name</code> would be "bound foo()"</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>hard binding API "Context"</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo(el) {
+    console.log( el, this.id );
+}
+
+var obj = {
+    id: "awesome"
+};
+
+// use `obj` as `this` for `foo(..)` calls
+[1, 2, 3].forEach( foo, obj ); // 1 awesome  2 awesome  3 awesome
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>new binding</h3>
+                    <ol>
+                        <li>a brand new object is created (aka, constructed) out of thin air</li>
+                        <li>the newly constructed object is [[Prototype]]-linked (Skipped until Chapter 5)</li>
+                        <li>the newly constructed object is set as the this binding for that function call</li>
+                        <li>unless the function returns its own alternate object, the new-invoked function call will automatically return the newly constructed object.</li>
+                    </ol>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo(a) {
+    this.a = a;
+}
+
+var bar = new foo( 2 );
+console.log( bar.a ); // 2
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>partial application</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo(p1,p2) {
+    this.val = p1 + p2;
+}
+
+// using `null` here because we don't care about
+// the `this` hard-binding in this scenario, and
+// it will be overridden by the `new` call anyway!
+var bar = foo.bind( null, "p1" );
+
+var baz = new bar( "p2" );
+
+baz.val; // p1p2
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Determining <i>this</i></h3>
+                    <ol>
+                        <li>
+                            <p>Is the function called with new (new binding)? If so, this is the newly constructed object.</p>
+                            <p><code>var bar = new foo()</code></p>
+                        </li>
+                        <li>
+                            <p>Is the function called with call or apply (explicit binding), even hidden inside a bind hard binding? If so, this is the explicitly specified object.</p>
+                            <p><code>var bar = foo.call( obj2 )</code></p>
+                        </li>
+                        <li>
+                            <p>Is the function called with a context (implicit binding), otherwise known as an owning or containing object? If so, this is that context object.</p>
+                            <p><code>var bar = obj1.foo()</code></p>
+                        </li>
+                        <li>
+                            <p>Otherwise, default the this (default binding). If in strict mode, pick undefined, otherwise pick the global object.</p>
+                            <p><code>var bar = foo()</code></p>
+                        </li>
+                    </ol>
+                    <p>Exception to this rule is that if you pass a <code>null</code> explicitly in <code>call</code> or <code>bind</code>, if the function uses <code>this</code>, the default binding will be used. It is much safer to use a DMZ described below</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>safely ignored <i>this</i> aka DMZ</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function foo(a,b) {
+    console.log( "a:" + a + ", b:" + b );
+}
+
+// our DMZ empty object
+var ø = Object.create( null );
+
+// spreading out array as parameters
+foo.apply( ø, [2, 3] ); // a:2, b:3
+
+// currying with `bind(..)`
+var bar = foo.bind( ø, 2 );
+bar( 3 ); // a:2, b:3
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <!-- REVIEW SOFT BINDING -->
+            <!-- REVIEW => LEXICAL THIS -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Key Takeaways</h3>
+                    <ul>
+                        <li>though the overall <code>this</code> binding rules are entirely based on the call-site, the global object is only eligible for the default binding if the contents are not running in <code>strict mode;</code></li>
+                        <li>Mixing non-strict mode and strict mode within your own code is not recommended</li>
+                        <li><code>this</code> binding precedence: new > explicit > implicit > default</li>
+                        <li>Use a DMZ empty object when you want to explicitly pass null for <code>call</code> & <code>apply</code></li>
+                        <li>kt-1</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- week3news Section -->
+    <section id="week3news" class="odd-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>This week in JavaScript...</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul>
+                        <li><a target="_blank" href="">LINK</a></li>
+                        <li><a target="_blank" href="">LINK</a></li>
+                        <li><a target="_blank" href="">LINK</a></li>
+                        <li><a target="_blank" href="">LINK</a></li>
+                        <li><a target="_blank" href="">LINK</a></li>
+                        <li><a target="_blank" href="">LINK</a></li>                
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="hw3" class="even-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Homework: this & Object Prototypes</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Read...</p>
+                    <ul>
+                        <li>Chapter 3: Objects</li>
+                        <li>Chapter 4: Mixing (Up) "Class" Objects</a></li>
+                    </ul>
+                    <strong>[## pages]</strong>
+                </div>
+            </div>
+        </div>
+    </section>    
 
     <!-- Contact Section -->
     <section id="footer" class="footer-section">
