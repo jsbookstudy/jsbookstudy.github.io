@@ -94,11 +94,22 @@
                             <li><a class="page-scroll" href="#hw3">Homework</a></li>
                         </ul>
                     </li>
-                    <li class="disabled">
-                        <a class="page-scroll" href="#aug30">Aug 30</a>
+                    <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                          Aug 30 <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="page-scroll" href="#to3">Chapter 3: Objects</li>
+                            <li><a class="page-scroll" href="#to4">Chapter 4: Mixing (Up) "Class" Objects</a></li>
+                            <li><a class="page-scroll" href="#week4news">This week in JavaScript...</a></li>
+                            <li><a class="page-scroll" href="#hw4">Homework</a></li>
+                        </ul>
                     </li>
                     <li class="disabled">
                         <a class="page-scroll" href="#sep6">Sep 6</a>
+                    </li>
+                    <li class="disabled">
+                        <a class="page-scroll" href="#sep13">Sep 13</a>
                     </li>
                     <li>
                         <a class="" href="https://github.com/getify/You-Dont-Know-JS/archive/master.zip"><span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Digital Books</a>
@@ -1333,10 +1344,10 @@ foo(); //undefined
                     <ul>
                         <li><strong>call-stack: </strong>the stack of functions that has been called to get us to the current moment in execution</li>
                         <li><strong>call-site: </strong>the location in code where a function is called: one level from the top of the call-stack</li>
-                        <li><strong>default binding: </strong>def-1</li>
-                        <li><strong>implicit binding: </strong>def-1</li>
-                        <li><strong>explicit binding: </strong>def-1</li>
-                        <li><strong>new binding: </strong>def-1</li>
+                        <li><strong>default binding: </strong></li>
+                        <li><strong>implicit binding: </strong></li>
+                        <li><strong>explicit binding: </strong></li>
+                        <li><strong>new binding: </strong></li>
                     </ul>
                 </div>
             </div>
@@ -1818,6 +1829,7 @@ foo.call( obj ); // 2
             </div>
         </div>
     </section>
+
     <section id="hw3" class="even-section">
         <div class="container">
             <div class="row">
@@ -1833,6 +1845,542 @@ foo.call( obj ); // 2
                         <li>Chapter 4: Mixing (Up) "Class" Objects</a></li>
                     </ul>
                     <strong>[48 pages]</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- to3 Section -->
+    <section id="to3" class="odd-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Chapter 3: Objects</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Relevant Terms</h3>
+                    <ul>
+                        <li><strong>shallow copy: </strong>Objects properties are references</li>
+                        <li><strong>deep copy: </strong>Object properties are duplicated</li>
+                        <li><strong>writable: </strong>ability for you to change the value of a property within an object</li>
+                        <li><strong>configurable: </strong>ability to modify a properties descriptor definition</li>
+                        <li><strong>enumerable: </strong>controls if a property will show up in certain object-property enumerations such as <code>for...in</code></li>
+                        <li><strong>immutable: </strong>properties or objects that cannot be changed</li>
+                        <li><strong>term-1: </strong>def-1</li>
+                        <li><strong>term-1: </strong>def-1</li>
+
+                        <li>writable: </li>
+                                <li>configurable: </li>
+                                <li>enumerable</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>literal form vs constructed form for objects</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+// literal form
+var myObj = {
+    key: value
+    // ...
+};
+
+// constructed form
+var myObj = new Object();
+myObj.key = value;
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>primitives vs objects</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var strPrimitive = "I am a string";
+typeof strPrimitive;                            // "string"
+strPrimitive instanceof String;                 // false
+
+var strObject = new String( "I am a string" );
+typeof strObject;                               // "object"
+strObject instanceof String;                    // true
+
+// inspect the object sub-type
+Object.prototype.toString.call( strObject );    // [object String]
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>property access vs key access</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var myObject = {
+    a: 2,
+    "blah.a" : 3,
+    "Super-Fun!" : 4
+};
+
+myObject.a;     // 2
+
+myObject["a"];  // 2
+
+myObject.blah.a; // TypeError
+
+myObject["blah.a"]; // 3
+
+myObject.Super-Fun!; // Unexpected token !
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>property names are always strings in objects</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var myObject = { };
+
+myObject[true] = "foo";
+myObject[3] = "bar";
+myObject[myObject] = "baz";
+
+myObject["true"];               // "foo"
+myObject["3"];                  // "bar"
+myObject["[object Object]"];    // "baz"
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>functions don't <i>belong</i> to an object</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var myObject = {
+    foo: function foo() {
+        console.log( "foo" );
+    }
+};
+
+var someFoo = myObject.foo;
+
+someFoo;        // function foo(){..}
+
+myObject.foo;   // function foo(){..}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>arrays can have mixed types</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var myArray = [ "foo", 42, "bar" ];
+
+myArray.length;     // 3
+
+myArray[0];         // "foo"
+
+myArray[2];         // "bar"
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>arrays are still objects</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var myArray = [ "foo", 42, "bar" ];
+
+myArray.baz = "baz";
+
+myArray.length; // 3
+
+myArray.baz;    // "baz"
+
+myArray["3"] = "blah";
+
+myArray.length; // 4
+
+myArray[3];     // "blah"
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Object copy</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+function anotherFunction() { /*..*/ }
+
+var anotherObject = {
+    c: true
+};
+
+var anotherArray = [];
+
+var myObject = {
+    a: 2,
+    b: anotherObject,   // reference, not a copy!
+    c: anotherArray,    // another reference!
+    d: anotherFunction
+};
+
+anotherArray.push( anotherObject, myObject );
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Object deep copy, JSON parse trick</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var newObj = JSON.parse( JSON.stringify( someObj ) );
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>ES6 shallow Object copy</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var newObj = Object.assign( {}, myObject );
+
+newObj.a;                       // 2
+newObj.b === anotherObject;     // true
+newObj.c === anotherArray;      // true
+newObj.d === anotherFunction;   // true
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>property descriptors</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var myObject = {
+    a: 2
+};
+
+Object.getOwnPropertyDescriptor( myObject, "a" );
+// {
+//    value: 2,
+//    writable: true,
+//    enumerable: true,
+//    configurable: true
+// }
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>writable example</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var myObject = {};
+
+Object.defineProperty( myObject, "a", {
+    value: 2,
+    writable: false, // not writable!
+    configurable: true,
+    enumerable: true
+} );
+
+myObject.a = 3;
+
+myObject.a; // 2 but TypeError in strict mode
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>configurable example</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var myObject = {
+    a: 2
+};
+
+myObject.a = 3;
+myObject.a;                 // 3
+
+Object.defineProperty( myObject, "a", {
+    value: 4,
+    writable: true,
+    configurable: false,    // not configurable!
+    enumerable: true
+} );
+
+myObject.a;                 // 4
+myObject.a = 5;
+myObject.a;                 // 5
+
+Object.defineProperty( myObject, "a", {
+    value: 6,
+    writable: true,
+    configurable: true,
+    enumerable: true
+} ); // TypeError
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>configurable-false prevents delete</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var myObject = {
+    a: 2
+};
+
+myObject.a;             // 2
+delete myObject.a;
+myObject.a;             // undefined
+
+Object.defineProperty( myObject, "a", {
+    value: 2,
+    writable: true,
+    configurable: false,
+    enumerable: true
+} );
+
+myObject.a;             // 2
+delete myObject.a;
+myObject.a;             // 2
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Object "constant"</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var myObject = {};
+
+Object.defineProperty( myObject, "FAVORITE_NUMBER", {
+    value: 42,
+    writable: false,
+    configurable: false
+} );
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>prevent extensions</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var myObject = {
+    a: 2
+};
+
+Object.preventExtensions( myObject );
+
+myObject.b = 3;
+myObject.b; // undefined but TypeError in strict mode
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Seal</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+// Object.seal(..) is essentially Object.preventExtensions(..)
+// + configurable = false
+
+var myObject = {
+    a: 2,
+    b: "blah",
+    foo: function(){},
+};
+
+for(property in myObject) {
+    Object.defineProperty( myObject, property, {
+        configurable: false
+    } );
+}
+
+Object.preventExtensions( myObject );
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Freeze</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+// Object.freeze(..) is essentially Object.seal(..) 
+// + configurable = false
+// + writable = false
+
+var myObject = {
+    a: 2,
+    b: "blah",
+    foo: function(){},
+};
+
+for(property in myObject) {
+    Object.defineProperty( myObject, property, {
+        writable: false,
+        configurable: false
+    } );
+}
+
+Object.preventExtensions( myObject );
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>custom getter/setter per property</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var myObject = {
+    // define a getter for `a`
+    get a() {
+        return this._a_;
+    },
+
+    // define a setter for `a`
+    set a(val) {
+        this._a_ = val * 2;
+    }
+};
+
+myObject.a = 2;
+
+myObject.a; // 4
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Key Takeaways</h3>
+                    <ul>
+                        <li>6 types in JS:
+                            <ul>
+                                <li>string</li>
+                                <li>number</li>
+                                <li>boolean</li>
+                                <li>undefined</li>
+                                <li>null</li>
+                                <li>object</li>
+                            </ul>
+                        </li>
+                        <li>String, number, and boolean primitives are coerced into their Object forms when you call their properties/methods</li>
+                        <li>Built-in Objects:
+                            <ul>
+                                <li>String</li>
+                                <li>Number</li>
+                                <li>Boolean</li>
+                                <li>Object</li>
+                                <li>Function</li>
+                                <li>Array</li>
+                                <li>Date</li>
+                                <li>RegExp</li>
+                                <li>Error</li>
+                            </ul>
+                        </li>
+                        <li>kt-1</li>
+                        <li>kt-1</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- to4 Section -->
+    <section id="to4" class="even-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Chapter 4: Mixing (Up) "Class" Objects</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Relevant Terms</h3>
+                    <ul>
+                        <li><strong>term-1: </strong>def-1</li>
+                        <li><strong>term-1: </strong>def-1</li>
+                        <li><strong>term-1: </strong>def-1</li>
+                        <li><strong>term-1: </strong>def-1</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Key Takeaways</h3>
+                    <ul>
+                        <li>kt-1</li>
+                        <li>kt-1</li>
+                        <li>kt-1</li>
+                        <li>kt-1</li>
+                        <li>kt-1</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- week4news Section -->
+    <section id="week4news" class="odd-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>This week in JavaScript...</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul>
+                        <li><a target="_blank" href="">LINK</a></li>
+                        <li><a target="_blank" href="">LINK</a></li>
+                        <li><a target="_blank" href="">LINK</a></li>
+                        <li><a target="_blank" href="">LINK</a></li>
+                        <li><a target="_blank" href="">LINK</a></li>           
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>     
+
+    <section id="hw5" class="even-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Homework: this & Object Prototypes</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Read...</p>
+                    <ul>
+                        <li>Chapter 5: FILL</li>
+                        <li>Chapter 6: FILL</a></li>
+                    </ul>
+                    <strong>[xx pages]</strong>
                 </div>
             </div>
         </div>
