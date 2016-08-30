@@ -1868,12 +1868,6 @@ foo.call( obj ); // 2
                         <li><strong>configurable: </strong>ability to modify a properties descriptor definition</li>
                         <li><strong>enumerable: </strong>controls if a property will show up in certain object-property enumerations such as <code>for...in</code></li>
                         <li><strong>immutable: </strong>properties or objects that cannot be changed</li>
-                        <li><strong>term-1: </strong>def-1</li>
-                        <li><strong>term-1: </strong>def-1</li>
-
-                        <li>writable: </li>
-                                <li>configurable: </li>
-                                <li>enumerable</li>
                     </ul>
                 </div>
             </div>
@@ -2228,7 +2222,7 @@ Object.preventExtensions( myObject );
                     <h3>Freeze</h3>
                     <pre class="copytoclipboard">
                         <code class="language-js">
-// Object.freeze(..) is essentially Object.seal(..) 
+// Object.freeze(..) is essentially Object.seal(..)
 // + configurable = false
 // + writable = false
 
@@ -2276,6 +2270,104 @@ myObject.a; // 4
             </div>
             <div class="row">
                 <div class="col-lg-12">
+                    <h3>enumeration</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var myObject = { };
+
+Object.defineProperty(
+    myObject,
+    "a",
+    // make `a` enumerable, as normal
+    { enumerable: true, value: 2 }
+);
+
+Object.defineProperty(
+    myObject,
+    "b",
+    // make `b` NON-enumerable
+    { enumerable: false, value: 3 }
+);
+
+myObject.b; // 3
+("b" in myObject); // true
+myObject.hasOwnProperty( "b" ); // true
+
+// .......
+
+for (var k in myObject) {
+    console.log( k, myObject[k] );
+}
+// "a" 2
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>array's built in iterator</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var myArray = [ 1, 2, 3 ];
+var it = myArray[Symbol.iterator]();
+
+it.next(); // { value:1, done:false }
+it.next(); // { value:2, done:false }
+it.next(); // { value:3, done:false }
+it.next(); // { done:true }
+
+// The internal array iterator is not the iterator object itself, but a function that returns the iterator object
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>ES6 custom iterator</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var myObject = {
+    a: 2,
+    b: 3
+};
+
+Object.defineProperty( myObject, Symbol.iterator, {
+    enumerable: false,
+    writable: false,
+    configurable: true,
+    value: function() {
+        var o = this;
+        var idx = 0;
+        var ks = Object.keys( o );
+        return {
+            next: function() {
+                return {
+                    value: o[ks[idx++]],
+                    done: (idx > ks.length)
+                };
+            }
+        };
+    }
+} );
+
+// iterate `myObject` manually
+var it = myObject[Symbol.iterator]();
+it.next(); // { value:2, done:false }
+it.next(); // { value:3, done:false }
+it.next(); // { value:undefined, done:true }
+
+// iterate `myObject` with `for..of`
+for (var v of myObject) {
+    console.log( v );
+}
+// 2
+// 3
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
                     <ul>
                         <li>6 types in JS:
@@ -2302,8 +2394,10 @@ myObject.a; // 4
                                 <li>Error</li>
                             </ul>
                         </li>
-                        <li>kt-1</li>
-                        <li>kt-1</li>
+                        <li>Use <code>Object.prototype.hasOwnProperty.call(myObject,"a")</code> to check if a property exists in an object. Does not work on arrays</li>
+                        <li>With respect to enumeration, <code>in</code> looks in the Prototype chain while <code>hasOwnProperty()</code> does not</li>
+                        <li>The order of iteration over an object's properties is <strong>not guaranteed</strong> and may vary between different JS engines</li>
+                        <li>The internal array iterator is not the iterator object itself, but a function that returns the iterator object</li>
                     </ul>
                 </div>
             </div>
@@ -2322,22 +2416,145 @@ myObject.a; // 4
                 <div class="col-lg-12">
                     <h3>Relevant Terms</h3>
                     <ul>
-                        <li><strong>term-1: </strong>def-1</li>
-                        <li><strong>term-1: </strong>def-1</li>
-                        <li><strong>term-1: </strong>def-1</li>
-                        <li><strong>term-1: </strong>def-1</li>
+                        <li><strong>class: </strong>an extensible program-code-template for creating objects, providing initial values for state (member variables) and implementations of behavior (member functions or methods) [these do <strong>NOT</strong> exist in JS]</li>
+                        <li><strong>inheritence: </strong>the concept of one thing gaining the properties or behaviours of something else </li>
+                        <li><strong>parent: </strong>class that contains properties that are behing inherited</li>
+                        <li><strong>child: </strong>class that inherits</li>
+                        <li><strong>polymorphism: </strong>the idea that any method can reference another method (of the same or different name) at a higher level of the inheritance hierarchy</li>
+                        <li><strong>mixin: </strong>JavaScript's object mechanism does not automatically perform copy behavior when you "inherit" or "instantiate". JS developers fake the missing copy behavior of classes in JavaScript with mixins</li>
                     </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>explicit mixins</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+// vastly simplified `mixin(..)` example:
+function mixin( sourceObj, targetObj ) {
+    for (var key in sourceObj) {
+        // only copy if not already present
+        if (!(key in targetObj)) {
+            targetObj[key] = sourceObj[key];
+        }
+    }
+
+    return targetObj;
+}
+
+var Vehicle = {
+    engines: 1,
+
+    ignition: function() {
+        console.log( "Turning on my engine." );
+    },
+
+    drive: function() {
+        this.ignition();
+        console.log( "Steering and moving forward!" );
+    }
+};
+
+var Car = mixin( Vehicle, {
+    wheels: 4,
+
+    drive: function() {
+        Vehicle.drive.call( this ); // bind this to Car's context, should be avoided if possible
+        console.log( "Rolling on all " + this.wheels + " wheels!" );
+    }
+} );
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>parasitic inheritance</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+// "Traditional JS Class" `Vehicle`
+function Vehicle() {
+    this.engines = 1;
+}
+Vehicle.prototype.ignition = function() {
+    console.log( "Turning on my engine." );
+};
+Vehicle.prototype.drive = function() {
+    this.ignition();
+    console.log( "Steering and moving forward!" );
+};
+
+// "Parasitic Class" `Car`
+function Car() {
+    // first, `car` is a `Vehicle`
+    var car = new Vehicle();
+
+    // now, let's modify our `car` to specialize it
+    car.wheels = 4;
+
+    // save a privileged reference to `Vehicle::drive()`
+    var vehDrive = car.drive;
+
+    // override `Vehicle::drive()`
+    car.drive = function() {
+        vehDrive.call( this );
+        console.log( "Rolling on all " + this.wheels + " wheels!" );
+    };
+
+    return car;
+}
+
+var myCar = new Car();
+
+myCar.drive();
+// Turning on my engine.
+// Steering and moving forward!
+// Rolling on all 4 wheels!
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>implicit mixins</h3>
+                    <pre class="copytoclipboard">
+                        <code class="language-js">
+var Something = {
+    cool: function() {
+        this.greeting = "Hello World";
+        this.count = this.count ? this.count + 1 : 1;
+    }
+};
+
+Something.cool();
+Something.greeting; // "Hello World"
+Something.count; // 1
+
+var Another = {
+    cool: function() {
+        // implicit mixin of `Something` to `Another`
+        Something.cool.call( this );
+    }
+};
+
+Another.cool();
+Another.greeting; // "Hello World"
+Another.count; // 1 (not shared state with `Something`)
+                        </code>
+                    </pre>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
                     <ul>
-                        <li>kt-1</li>
-                        <li>kt-1</li>
-                        <li>kt-1</li>
-                        <li>kt-1</li>
-                        <li>kt-1</li>
+                        <li>JavaScript does not have classes</li>
+                        <li>Classes mean copies</li>
+                        <li>In JS the relationship between child and parent exists only between the two <code>.prototype</code> objects of the respective constructors, the constructors themselves are not directly related, and thus there's no simple way to relatively reference one from the other without ES6's <code>class</code></li>
+                        <li>Class inheritance implies copies</li>
+                        <li>Explicit psuedo-polymorphism should be avoided wherever possible</li>
+                        <li>Even manual copying of functions (aka, mixins) from one object to another doesn't actually emulate the real duplication from class to instance that occurs in class-oriented languages. If you modified one of the shared function objects by adding properties on top of it, for instance, both parent and child would be "affected" via the shared reference</li>
+                        <li><strong>In general, faking classes in JS often sets more landmines for future coding than solving present real problems.</strong></li>
                     </ul>
                 </div>
             </div>
@@ -2355,16 +2572,16 @@ myObject.a; // 4
             <div class="row">
                 <div class="col-lg-12">
                     <ul>
-                        <li><a target="_blank" href="">LINK</a></li>
-                        <li><a target="_blank" href="">LINK</a></li>
-                        <li><a target="_blank" href="">LINK</a></li>
-                        <li><a target="_blank" href="">LINK</a></li>
-                        <li><a target="_blank" href="">LINK</a></li>           
+                        <li><a target="_blank" href="https://medium.com/@sachagreif/the-state-of-javascript-front-end-frameworks-1a2d8a61510#.6l4guyymc">The State of JavaScript Frameworks 2016</a></li>
+                        <li><a target="_blank" href="https://github.com/openfootball/football.json">Soccer (football) data in JSON</a></li>
+                        <li><a target="_blank" href="http://www.pixijs.com/">2D WebGL Rendering Engine</a></li>
+                        <li><a target="_blank" href="https://github.com/HiFaraz/node-playbook#">Node.js Playbook (aka quickstart)</a></li>
+                        <li><a target="_blank" href="https://github.com/airbnb/javascript">Airbnb JS Style Guide</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-    </section>     
+    </section>
 
     <section id="hw5" class="even-section">
         <div class="container">
@@ -2377,10 +2594,10 @@ myObject.a; // 4
                 <div class="col-lg-12">
                     <p>Read...</p>
                     <ul>
-                        <li>Chapter 5: FILL</li>
-                        <li>Chapter 6: FILL</a></li>
+                        <li>Chapter 5: Prototypes</li>
+                        <li>Chapter 6: Behavior Delegation</a></li>
                     </ul>
-                    <strong>[xx pages]</strong>
+                    <strong>[57 pages]</strong>
                 </div>
             </div>
         </div>
