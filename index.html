@@ -55,9 +55,6 @@
                         <a class="page-scroll" href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#calendar">Calendar</a>
-                    </li>
-                    <li>
                         <a class="page-scroll" href="#poll">Poll</a>
                     </li>
                     <li>
@@ -116,8 +113,31 @@
                             <li><a class="page-scroll" href="#hw5">Homework</a></li>
                         </ul>
                     </li>
-                    <li class="disabled">
-                        <a class="page-scroll" href="#sep13">Sep 13</a>
+                    <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                          Sep 13 <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="page-scroll" href="#ec">Extra Class</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                          Key Takeaways<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="page-scroll" href="#sckt1">Chapter 1: What is Scope?</li>
+                            <li><a class="page-scroll" href="#sckt2">Chapter 2: Lexical Scope</a></li>
+                            <li><a class="page-scroll" href="#sckt3">Chapter 3: Function Versus Block Scope</a></li>
+                            <li><a class="page-scroll" href="#sckt4">Chapter 4: Hoisting</a></li>
+                            <li><a class="page-scroll" href="#sckt5">Chapter 5: Scope Closure</a></li>
+                            <li><a class="page-scroll" href="#tokt1">Chapter 1: <i>this</i> Or That</a></li>
+                            <li><a class="page-scroll" href="#tokt2">Chapter 2: <i>this</i> All Makes Sense Now!</a></li>
+                            <li><a class="page-scroll" href="#tokt3">Chapter 3: Objects</li>
+                            <li><a class="page-scroll" href="#tokt4">Chapter 4: Mixing (Up) "Class" Objects</a></li>
+                            <li><a class="page-scroll" href="#tokt5">Chapter 5: Prototypes</li>
+                            <li><a class="page-scroll" href="#tokt6">Chapter 6: Behavior Delegation</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a class="" href="https://github.com/getify/You-Dont-Know-JS/archive/master.zip"><span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Digital Books</a>
@@ -277,7 +297,7 @@ foo( 2 );
                     </pre>
                 </div>
             </div>
-            <div class="row">
+            <div id="sckt1" class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
                     <ul>
@@ -368,7 +388,7 @@ console.log( a ); // 2 -- Oops, leaked global!
                     </pre>
                 </div>
             </div>
-            <div class="row">
+            <div id="sckt2" class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
                     <ul>
@@ -653,7 +673,7 @@ console.log( i ); // ReferenceError
                     </pre>
                 </div>
             </div>
-            <div class="row">
+            <div id="sckt3" class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
                     <ul>
@@ -874,7 +894,7 @@ else {
                     </pre>
                 </div>
             </div>
-            <div class="row">
+            <div id="sckt4" class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
                     <ul>
@@ -1130,7 +1150,7 @@ foo.identify(); // FOO MODULE
                     </pre>
                 </div>
             </div>
-            <div class="row">
+            <div id="sckt5" class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
                     <ul>
@@ -1315,7 +1335,7 @@ foo(); //undefined
                     </pre>
                 </div>
             </div>
-            <div class="row">
+            <div id="tokt1" class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
                     <ul>
@@ -1352,10 +1372,6 @@ foo(); //undefined
                     <ul>
                         <li><strong>call-stack: </strong>the stack of functions that has been called to get us to the current moment in execution</li>
                         <li><strong>call-site: </strong>the location in code where a function is called: one level from the top of the call-stack</li>
-                        <li><strong>default binding: </strong></li>
-                        <li><strong>implicit binding: </strong></li>
-                        <li><strong>explicit binding: </strong></li>
-                        <li><strong>new binding: </strong></li>
                     </ul>
                 </div>
             </div>
@@ -1796,7 +1812,7 @@ foo.call( obj ); // 2
                     </pre>
                 </div>
             </div>
-            <div class="row">
+            <div id="tokt2" class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
                     <ul>
@@ -2374,7 +2390,7 @@ for (var v of myObject) {
                     </pre>
                 </div>
             </div>
-            <div class="row">
+            <div id="tokt3" class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
                     <ul>
@@ -2552,7 +2568,7 @@ Another.count; // 1 (not shared state with `Something`)
                     </pre>
                 </div>
             </div>
-            <div class="row">
+            <div id="tokt4" class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
                     <ul>
@@ -2910,7 +2926,7 @@ b.isPrototypeOf( c );
                     </pre>
                 </div>
             </div>
-            <div class="row">
+            <div id="tokt5" class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
                     <ul>
@@ -3093,6 +3109,19 @@ b2.speak();
             </div>
             <div class="row">
                 <div class="col-lg-12">
+                    <h3>OO vs OLOO diagrams (Simplified)</h3>
+                    <div class="col-lg-6">
+                        <h5>OO</h5>
+                        <img class="img-responsive" style="background-color: white" src="https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/this%20%26%20object%20prototypes/fig5.png" alt="">
+                    </div>
+                    <div class="col-lg-6">
+                        <h5>OLOO</h5>
+                        <img class="img-responsive" style="background-color: white" src="https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/this%20%26%20object%20prototypes/fig6.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
                     <h3>widget jQuery example</h3>
                     <div class="col-lg-6">
                         <h5>OO</h5>
@@ -3205,13 +3234,13 @@ $( document ).ready( function(){
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div id="tokt6" class="row">
                 <div class="col-lg-12">
                     <h3>Key Takeaways</h3>
                     <ul>
                         <li>Classes and inheritence are a mental model you can <i>choose</i> from. You should consider <strong>behavior delegation</strong> as one of those models</li>
                         <li>Object only design simiplifies the forced class model</li>
-                        <li>Still more to fill out...</li>
+                        <li>In OLOO, it is discouraged to name functions the same thing because we are not "inheriting"</li>
                     </ul>
                 </div>
             </div>
@@ -3260,6 +3289,33 @@ $( document ).ready( function(){
         </div>
     </section>
 
+    <!-- ec Section -->
+    <section id="ec" class="odd-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Extra Class</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Topics</h3>
+                    <ul>
+                        <li>Why is <code>var self = this</code> bad and how can we fix it?</li>
+                        <li>Why should we consider OLOO?</li>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console">Some console tips...</a></li>
+                        <li>copy(JSON.stringify(x, null, 4))</li>
+                                <pre class="copytoclipboard">
+                                    <code class="language-js">
+                        {"web-app": { "servlet": [ { "servlet-name": "cofaxCDS", "servlet-class": "org.cofax.cds.CDSServlet", "init-param": { "configGlossary:installationAt": "Philadelphia, PA", "configGlossary:adminEmail": "ksm@pobox.com", "configGlossary:poweredBy": "Cofax", "configGlossary:poweredByIcon": "/images/cofax.gif", "configGlossary:staticPath": "/content/static", "templateProcessorClass": "org.cofax.WysiwygTemplate", "templateLoaderClass": "org.cofax.FilesTemplateLoader", "templatePath": "templates", "templateOverridePath": "", "defaultListTemplate": "listTemplate.htm", "defaultFileTemplate": "articleTemplate.htm", "useJSP": false, "jspListTemplate": "listTemplate.jsp", "jspFileTemplate": "articleTemplate.jsp", "cachePackageTagsTrack": 200, "cachePackageTagsStore": 200, "cachePackageTagsRefresh": 60, "cacheTemplatesTrack": 100, "cacheTemplatesStore": 50, "cacheTemplatesRefresh": 15, "cachePagesTrack": 200, "cachePagesStore": 100, "cachePagesRefresh": 10, "cachePagesDirtyRead": 10, "searchEngineListTemplate": "forSearchEnginesList.htm", "searchEngineFileTemplate": "forSearchEngines.htm", "searchEngineRobotsDb": "WEB-INF/robots.db", "useDataStore": true, "dataStoreClass": "org.cofax.SqlDataStore", "redirectionClass": "org.cofax.SqlRedirection", "dataStoreName": "cofax", "dataStoreDriver": "com.microsoft.jdbc.sqlserver.SQLServerDriver", "dataStoreUrl": "jdbc:microsoft:sqlserver://LOCALHOST:1433;DatabaseName=goon", "dataStoreUser": "sa", "dataStorePassword": "dataStoreTestQuery", "dataStoreTestQuery": "SET NOCOUNT ON;select test='test';", "dataStoreLogFile": "/usr/local/tomcat/logs/datastore.log", "dataStoreInitConns": 10, "dataStoreMaxConns": 100, "dataStoreConnUsageLimit": 100, "dataStoreLogLevel": "debug", "maxUrlLength": 500}}, { "servlet-name": "cofaxEmail", "servlet-class": "org.cofax.cds.EmailServlet", "init-param": { "mailHost": "mail1", "mailHostOverride": "mail2"}}, { "servlet-name": "cofaxAdmin", "servlet-class": "org.cofax.cds.AdminServlet"}, { "servlet-name": "fileServlet", "servlet-class": "org.cofax.cds.FileServlet"}, { "servlet-name": "cofaxTools", "servlet-class": "org.cofax.cms.CofaxToolsServlet", "init-param": { "templatePath": "toolstemplates/", "log": 1, "logLocation": "/usr/local/tomcat/logs/CofaxTools.log", "logMaxSize": "", "dataLog": 1, "dataLogLocation": "/usr/local/tomcat/logs/dataLog.log", "dataLogMaxSize": "", "removePageCache": "/content/admin/remove?cache=pages&id=", "removeTemplateCache": "/content/admin/remove?cache=templates&id=", "fileTransferFolder": "/usr/local/tomcat/webapps/content/fileTransferFolder", "lookInContext": 1, "adminGroupID": 4, "betaServer": true}}], "servlet-mapping": { "cofaxCDS": "/", "cofaxEmail": "/cofaxutil/aemail/*", "cofaxAdmin": "/admin/*", "fileServlet": "/static/*", "cofaxTools": "/tools/*"}, "taglib": { "taglib-uri": "cofax.tld", "taglib-location": "/WEB-INF/tlds/cofax.tld"}}}
+                                    </code>
+                                </pre>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Contact Section -->
     <section id="footer" class="footer-section">
         <div class="container">
